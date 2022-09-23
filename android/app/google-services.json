@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39261851557",
+    "project_id": "signin-with-e455b",
+    "storage_bucket": "signin-with-e455b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39261851557:android:d03b8a58c71c2f40fc624c",
+        "android_client_info": {
+          "package_name": "com.signin.signin_with_google"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39261851557-ktevihr6ambjo7oki34fmj76i5jnm1ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCywwWj26H7vGUPYwHa9cbmKWiruknSgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39261851557-ktevihr6ambjo7oki34fmj76i5jnm1ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
