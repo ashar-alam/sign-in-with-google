@@ -10,18 +10,19 @@ class MyListviewScreen extends StatefulWidget {
 }
 
 class _MyListviewScreenState extends State<MyListviewScreen> {
-  List<String> data = ['hello', 'ashar', 'welcome', 'world'];
+  List<String> data = [
+    // 'hello', 'ashar', 'welcome', 'world'
+  ];
   String text = '';
-  List<bool> isChecked = [false];
+  List<bool> isChecked = [];
   // bool isChecked = false;
   TextEditingController title = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-    data.forEach((element) {
+    for (var element in data) {
       isChecked.add(false);
-    });
+    }
   }
 
   @override
@@ -31,9 +32,17 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
     super.dispose();
   }
 
-  var placeHolder = [];
+  var indexHolder = [];
 
   @override
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  // void validate(){
+  //   if(formkey.currentState!.validate()){
+  //     // print("ok");
+  //   }else{
+  //     // print("Error");
+  //   }
+  // }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -41,21 +50,24 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
         // centerTitle: true,
         title: const Text(StringManager.listviewScreen),
         actions: [
-          Center(child: const Text("Selected Items")),
+          const Center(child: Text("Selected Items")),
           IconButton(
             onPressed: () {
               setState(() {
-                print(placeHolder);
-                placeHolder.forEach((element) {data.removeAt(element);
-                  
-                
-                });
-                
+                for (var element in indexHolder) {
+                  data.removeAt(element);
+                  // print("data$data");
+                }
+                indexHolder.clear();
+                // print(indexHolder);
+                // print(isChecked);
+                for (var element in data) {
+                  isChecked.remove(true);
+                }
               });
             },
             icon: const Icon(Icons.delete),
           ),
-          
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -63,10 +75,17 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
         elevation: 5,
         onPressed: () {
           setState(() {
-            String title1 = title.text;
-            data.insert(0, (title1));
-            isChecked.add(false);
+            if (formkey.currentState!.validate()) {
+              String title1 = title.text;
+              data.insert(0, (title1));
+              isChecked.add(false);
+            }
+            title.clear();
+            // MyTextFormFeild();
+
             // data.removeLast();
+
+            // print("hello$data isChecked$isChecked");
           });
         },
         child:
@@ -97,22 +116,21 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
                                 onChanged: ((bool? value) {
                                   setState(
                                     () {
-                                    
                                       // List.forEach((element){
                                       //   if(value== true){
-                                      //     placeHolder.add(index);
+                                      //     indexHolder.add(index);
                                       //   }
                                       // }
                                       // );
                                       // isChecked = value! as List<bool>;
                                       isChecked[index] = !isChecked[index];
-                                        if(isChecked[index]) {
-                                          placeHolder.add(index);
-                                          print(placeHolder);
-                                        } else {
-                                          placeHolder.remove(index);
-                                          print(placeHolder);
-                                        }
+                                      if (isChecked[index] == true) {
+                                        indexHolder.add(index);
+                                        // print(indexHolder);
+                                      } else {
+                                        indexHolder.remove(index);
+                                        // print(indexHolder);
+                                      }
                                     },
                                   );
                                 }),
@@ -158,6 +176,9 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
                                 onPressed: () {
                                   setState(() {
                                     data.removeAt(index);
+                                    // indexHolder.removeAt(index);
+
+                                    // print("data$data");
                                   });
                                 },
                                 icon: const Icon(Icons.delete),
@@ -171,17 +192,26 @@ class _MyListviewScreenState extends State<MyListviewScreen> {
                 );
               }),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                maxLines: null,
-                autocorrect: true,
-                controller: title,
-                decoration:
-                    const InputDecoration(hintText: "Content of the list "),
+              child: Form(
+                key: formkey,
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                  maxLines: null,
+                  autocorrect: true,
+                  controller: title,
+                  decoration:
+                      const InputDecoration(hintText: "Content of the list "),
+                ),
               ),
             ),
+            // MyTextFormFeild(),
             // MyListview(),
           ],
         ),

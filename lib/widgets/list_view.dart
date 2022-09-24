@@ -28,8 +28,8 @@ class _MyListviewState extends State<MyListview> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
+    return 
+     ListView.builder(
         itemCount: data.length,
         itemBuilder: ((context, index) {
           return Card(
@@ -39,7 +39,7 @@ class _MyListviewState extends State<MyListview> {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 title: Text(data[index]),
-                trailing: Container(
+                trailing: SizedBox(
                   width: 100,
                   child: Row(
                     children: [
@@ -106,20 +106,20 @@ class _MyListviewState extends State<MyListview> {
             ),
           );
         }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppStyle.purpleAccent,
-        elevation: 5,
-        onPressed: () {
-          setState(() {
-            data.insert(0, (data.first));
-            // data.removeLast();
-          });
-        },
-        child:
-            // Text("remove"),
-            const Icon(Icons.add),
-      ),
-    );
+      );
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: AppStyle.purpleAccent,
+      //   elevation: 5,
+      //   onPressed: () {
+      //     setState(() {
+      //       data.insert(0, (data.first));
+      //       // data.removeLast();
+      //     });
+      //   },
+      //   child:
+      //       // Text("remove"),
+      //       const Icon(Icons.add),
+      // );
+    
   }
 }
